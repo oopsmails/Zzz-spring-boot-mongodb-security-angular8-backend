@@ -19,6 +19,7 @@ spring.data.mongodb.port=27017
 
 ### Sample data:
 
+`sudo docker exec -it mongodb bash`
 
 ```
 use springmongodb
@@ -31,13 +32,49 @@ db.roles.save({ role: "ADMIN" })
 db.roles.save({ role: "USER" })
 ```
 
+```
+db.products.save([
+    {
+        "prodName": "Lego Ninja",
+        "prodDesc": "Toy abc",
+        "prodPrice": 56.66,
+        "prodImage": "abc.png"
+    },
+    {
+        "prodName": "Lego Mario",
+        "prodDesc": "Toy cde",
+        "prodPrice": 88.88,
+        "prodImage": "bcd.png"
+    }
+]
+)
+```
+
+
 #### About @DBRef
 
 https://stackoverflow.com/questions/44259583/spring-mongo-db-dbref
 
 https://www.baeldung.com/cascading-with-dbref-and-lifecycle-events-in-spring-data-mongodb
 
+- Need to run following updates to link roles for the user
+
+- Copy the roles to be used in update
+
 ```
+{
+"_id": "ObjectId(\"600595a460c6d5d5e37401a0\")",
+"role": "USER"
+},
+{
+"_id": "ObjectId(\"600595a160c6d5d5e374019f\")",
+"role": "ADMIN"
+}
+
+```
+
+```
+
 db.users.update({ _id: ObjectId("5d40a41593cd1d5864705b1e") }, {
     $set: {
         "email": "test1@abc.com",
@@ -45,10 +82,10 @@ db.users.update({ _id: ObjectId("5d40a41593cd1d5864705b1e") }, {
         "enabled": true,
         "roles": [
             { "$ref":"roles",
-               "$id" :ObjectId("5d40a26977ac023c9ef2056e")
+               "$id" :ObjectId("600595a460c6d5d5e37401a0")
              },
              { "$ref":"roles",
-               "$id":ObjectId("5d40a26b77ac023c9ef2056f")
+               "$id":ObjectId("600595a160c6d5d5e374019f")
              }
         ],
         "_class": "com.oopsmails.springangularauth.models.User"
@@ -62,8 +99,8 @@ db.users.update({ _id: ObjectId("5d40a41593cd1d5864705b1e") }, {
         "password": "$2a$10$VzIm8k0v0wOuD.TdEtwvZeIa.JS9D4bIN8qekgo7sRTxbBpUEVGnq",
         "enabled": true,
         "roles": [
-            DBRef("roles", ObjectId("5d40a26977ac023c9ef2056e")),
-            DBRef("roles", ObjectId("5d40a26b77ac023c9ef2056f")),
+            DBRef("roles", ObjectId("600595a460c6d5d5e37401a0")),
+            DBRef("roles", ObjectId("600595a160c6d5d5e374019f")),
         ],
         "_class": "com.oopsmails.springangularauth.models.User"
     }
@@ -71,25 +108,6 @@ db.users.update({ _id: ObjectId("5d40a41593cd1d5864705b1e") }, {
 
 ```
 
-```
-
-db.products.save([
-  {
-    "prodName": "Lego Ninja",
-    "prodDesc": "Toy abc",
-    "prodPrice": 56.66,
-    "prodImage": "abc.png"
-  },
-  {
-    "prodName": "Lego Mario",
-    "prodDesc": "Toy cde",
-    "prodPrice": 88.88,
-    "prodImage": "bcd.png"
-  }
-]
-)
-
-```
 
 ## Spring Security
 
