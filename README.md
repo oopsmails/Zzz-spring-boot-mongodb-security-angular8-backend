@@ -14,8 +14,9 @@ spring.data.mongodb.host=192.168.99.100
 spring.data.mongodb.port=27017
 ```
 
-### Use nosqlbooster4mongo-5.1.12.exe as mongo db GUI
+****Use nosqlbooster4mongo-5.1.12.exe as mongo db GUI**
 
+nosqlbooster4mongo-6.2.8.AppImage
 
 ### Sample data:
 
@@ -109,9 +110,11 @@ db.users.update({ _id: ObjectId("5d40a41593cd1d5864705b1e") }, {
 ```
 
 
-## Spring Security
+## Trouble Shooting
 
-### Only adding "@PreAuthorize" not working, i.e, not seeing 403 error when using ROLE_VIEWER vs ADMIN(or USER)
+### Spring Boot: 
+
+- Spring Security: Only adding "@PreAuthorize" not working, i.e, not seeing 403 error when using ROLE_VIEWER vs ADMIN(or USER)
 
 ```
 @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('ROLE_EDITOR')")
@@ -135,7 +138,7 @@ public class SpringAngularAuthApplication {
 
 ```
 
-### spring boot rolevoter rolePrefix, by default adding role prefix "ROLE_"
+- spring boot rolevoter rolePrefix, by default adding role prefix "ROLE_"
 
 https://stackoverflow.com/questions/38134121/how-do-i-remove-the-role-prefix-from-spring-security-with-javaconfig
 
@@ -145,4 +148,29 @@ https://stackoverflow.com/questions/38134121/how-do-i-remove-the-role-prefix-fro
 		return  new GrantedAuthorityDefaults("");
 	}
 ```
+
+### JDK8 to JDK11
+
+- javax.xml ...
+
+``````
+status: 500
+statusText: "OK"
+url: "http://localhost:8080/api/auth/login"
+ok: false
+name: "HttpErrorResponse"
+message: "Http failure response for http://localhost:8080/api/auth/login: 500 OK"
+```
+
+Solution: build.gradle
+
+```
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'
+	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.3'
+
+	annotationProcessor 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'
+	annotationProcessor 'org.glassfish.jaxb:jaxb-runtime:2.3.3'
+	annotationProcessor 'javax.annotation:javax.annotation-api:1.3.2'
+```
+
 
