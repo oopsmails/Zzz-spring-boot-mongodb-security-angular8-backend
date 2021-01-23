@@ -1,6 +1,6 @@
 package com.oopsmails.springangularauth;
 
-import com.oopsmails.springangularauth.models.Products;
+import com.oopsmails.springangularauth.models.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,12 +29,12 @@ public class SpringAngularAuthApplicationTests {
 
     @Test
     public void contextLoads() throws Exception {
-        Products products = new Products();
-        products.setProdDesc("Toy abc");
-        products.setProdName("Lego Ninja");
-        products.setProdPrice(56.66);
+        Product product = new Product();
+        product.setProdDesc("Toy abc");
+        product.setProdName("Lego Ninja");
+        product.setProdPrice(56.66);
 
-        String prettyJsonStr = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(products);
+        String prettyJsonStr = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(product);
         System.out.println("prettyJsonStr = " + prettyJsonStr);
     }
 

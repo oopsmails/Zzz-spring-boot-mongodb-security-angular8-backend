@@ -25,7 +25,7 @@ nosqlbooster4mongo-6.2.8.AppImage
 ```
 use springmongodb
 
-db.createCollection("products")
+db.createCollection("product")
 db.createCollection("roles")
 db.createCollection("users")
 
@@ -34,7 +34,7 @@ db.roles.save({ role: "USER" })
 ```
 
 ```
-db.products.save([
+db.product.save([
     {
         "prodName": "Lego Ninja",
         "prodDesc": "Toy abc",
@@ -118,7 +118,7 @@ db.users.update({ _id: ObjectId("5d40a41593cd1d5864705b1e") }, {
 
 ```
 @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('ROLE_EDITOR')")
-    @RequestMapping(method = RequestMethod.GET, value = "/products")
+    @RequestMapping(method = RequestMethod.GET, value = "/product")
     public Iterable<Products> product() {
         return productRepository.findAll();
     }

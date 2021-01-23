@@ -3,8 +3,8 @@ package com.oopsmails.springangularauth.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "products")
-public class Products {
+@Document(collection = "product")
+public class Product {
 
 	@Id
     String id;
@@ -13,10 +13,10 @@ public class Products {
     Double prodPrice;
     String prodImage;
     
-	public Products() {
+	public Product() {
 	}
 
-	public Products(String prodName, String prodDesc, Double prodPrice, String prodImage) {
+	public Product(String prodName, String prodDesc, Double prodPrice, String prodImage) {
 		super();
 		this.prodName = prodName;
 		this.prodDesc = prodDesc;

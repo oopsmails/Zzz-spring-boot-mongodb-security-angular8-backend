@@ -1,10 +1,9 @@
 package com.oopsmails.springangularauth.repositories;
 
-import com.oopsmails.springangularauth.models.Products;
+import com.oopsmails.springangularauth.models.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ProductRepository extends MongoRepository<Products, String> {
-	
+public interface ProductRepository extends MongoRepository<Product, String> {
 	@Override
-    void delete(Products deleted);
+    void delete(Product deleted);
 }
